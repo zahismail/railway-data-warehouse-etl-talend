@@ -1,0 +1,43 @@
+# -----------------------------
+# Talend / Maven generated files
+# -----------------------------
+poms/
+**/target/
+**/*.class
+*.jar
+
+# Talend generated/system boilerplate in this project
+code/routines/system/
+sqlPatterns/
+
+# Talend thumbnails / generated indexes
+process/*.screenshot
+recycle_bin.index
+train_project_talendTablesExport.xml
+.settings/mappings/
+.settings/migration_task.index
+.settings/relationship.index
+
+# Temporary files
+temp/
+*.tmp
+*.log
+
+
+
+# -----------------------------
+# Secrets / local environment
+# -----------------------------
+.env
+.env.*
+secrets/
+credentials/
+
+# -----------------------------
+# OS / editor noise
+# -----------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
