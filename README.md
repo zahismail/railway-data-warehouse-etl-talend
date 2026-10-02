@@ -4,7 +4,7 @@ Academic data-engineering project built with **Talend Open Studio for Data Integ
 
 The project implements ETL pipelines for a railway-reservation data warehouse. Source CSV files are ingested, transformed, deduplicated where needed, and loaded into dimensional tables and a reservation fact table.
 
-> This is an academic/portfolio project. It is not affiliated with or endorsed by SNCF. Source datasets and credentials are intentionally not included in the public repository.
+> This is an academic/portfolio project. It is not affiliated with or endorsed by SNCF. The source datasets used for this project are included in the repository through Git LFS. Database credentials are not included.
 
 ## Architecture
 
@@ -70,16 +70,14 @@ The project uses components including:
 
 ```text
 .
-├── process/           # Talend job definitions
-├── context/           # Environment-specific context definitions, if configured
-├── metadata/          # Reusable metadata, if configured
-├── .project           # Talend/Eclipse project definition
-├── talend.project     # Talend project metadata
+├── context/            # Shared Talend context configuration
+├── data/               # Source CSV datasets managed with Git LFS
+├── process/            # Talend job definitions
+├── .gitattributes      # Git LFS configuration for CSV files
 ├── .gitignore
+├── .project            # Talend/Eclipse project definition
+├── talend.project      # Talend project metadata
 └── README.md
-```
-
-Generated Maven/build output and Talend system boilerplate are intentionally excluded from the public repository.
 
 ## Configuration
 
@@ -112,22 +110,30 @@ Keep `DB_PASSWORD` empty in the public project and provide the value locally at 
 
 ## Running the Project
 
-1. Open/import the project in a compatible Talend Open Studio environment.
-2. Configure the database and input-directory context variables.
-3. Ensure the target SQL Server database/schema exists.
-4. Run the calendar and dimension jobs.
-5. Run `Reservation_fact_tables` after the dimension tables have been populated.
+1. Clone the repository with Git LFS enabled.
+2. Open/import the project in Talend Open Studio for Data Integration 8.0.1 or a compatible environment.
+3. Configure the `project_config` context:
+   - `DB_HOST`
+   - `DB_PORT`
+   - `DB_NAME`
+   - `DB_USER`
+   - `DB_PASSWORD`
+   - `INPUT_DIR`
+4. Set `INPUT_DIR` to the local path of the repository's `data/` directory.
+5. Ensure the target SQL Server database and tables exist.
+6. Run the calendar and dimension jobs.
+7. Run `Reservation_fact_tables` after the dimension tables have been populated.
 
 ## Data and Security
 
-The original source datasets are not included in this repository.
+The source datasets used by the ETL pipelines are included in the `data/` directory and are managed using Git LFS because of their size.
 
-Before publishing:
+Sensitive and machine-specific configuration is intentionally excluded:
 
-- Remove or parameterize database passwords.
-- Replace absolute local file paths with context variables.
-- Do not commit real CSV source data unless redistribution is explicitly permitted.
-- Do not commit generated build output such as `poms/` or `target/`.
+- Database passwords are not stored in the public context configuration.
+- Database connection settings use Talend context variables.
+- Absolute local Windows paths have been replaced with `context.INPUT_DIR`.
+- Generated build output such as `poms/` and `target/` is excluded.
 
 ## What This Project Demonstrates
 
